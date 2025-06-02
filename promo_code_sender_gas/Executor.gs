@@ -1,18 +1,29 @@
 // Google Play Promo Code manager for Google Apps Script
 // trigger by Time
 // - watches the Google Group entries
-// - sends promo code mail to new-commer
+// - sends promo code mail to new-comer
 // - sends bcc to admin
 // copyright 2025, hanagai
 
-// modify GROUP_EMAIL and APP_NAME
-// adds Promotion code into the spread sheet
-// set up trigger and give permissions
+// prepare your Spread Sheet with two sheets of emails and codes
+// put this file at Extensions -> Apps Script
+// register a reference of PromoCodeSender into library
+// modify GROUP_EMAIL and APP_NAME in this script
+// adds header row into the codes sheet
+// adds Promotion code into the codes sheet
+// set up trigger to executePromoCodeSender and give permissions
+// set null to DISABLE_EMAIL and DISABLE_GROUPS_APP after testing
+//
+// execute setProperties to reflect changes
+// execute showProperties to see current settings
+// these settings are saved on each Spread Sheet
 //
 // users may receive mail with a subject like this:
-// Jotting[teazt] GIFT CODE 100% discount
+// Jotting[teazt1] GIFT CODE 100% discount
 
-// main executor
+/**
+ * main executor
+ */
 function executePromoCodeSender() {
   try {
     PromoCodeSender.doPromoCodeSender();
@@ -23,8 +34,10 @@ function executePromoCodeSender() {
   }
 }
 
-// set config
-// modify and run this before using
+/**
+ * set config
+ * modify and run this before using
+ */
 function setProperties() {
   const APP_NAME = 'Jotting';
   const GROUP_EMAIL = 'teazt1@googlegroups.com';
@@ -44,7 +57,9 @@ function setProperties() {
   PromoCodeSender.setDocProperties(config);
 }
 
-// show config
+/**
+ * show config
+ */
 function showProperties() {
   PromoCodeSender.showDocProperties();
 }
