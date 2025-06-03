@@ -114,7 +114,7 @@ function updateCodesSheet(sheet, users) {
   // get new-comers
   let new_emails = [];
   users.forEach(user => {
-    Logger.log(`${user}, ${Object.prototype.toString.call(user)}`)
+    //Logger.log(`${user}, ${Object.prototype.toString.call(user)}`)
     //if(!emails.includes(user)) {
     // includes is not properly supported
     if(-1 == emails.findIndex(function(email){return email == user})) {
@@ -131,10 +131,11 @@ function updateCodesSheet(sheet, users) {
       const row = sheet.getRange(r, 2, 1, 2);  // Email, Sent
       const email = row.getCell(1, 1).getValue();
       const sent = row.getCell(1, 2).getValue();
-      Logger.log(`NEW: row: ${r}, Email: ${email}, Sent: ${sent}`)
+      //Logger.log(`NEW: row: ${r}, Email: ${email}, Sent: ${sent}`)
       if(email == '' && sent != DONE) {
         row.getCell(1, 1).setValue(new_emails.shift());
         row.getCell(1, 2).setValue(NEW_TO_SEND);
+        Logger.log(`NEW: row: ${r}`)
         if(new_emails.length == 0) break;
       }
     }
@@ -160,7 +161,7 @@ function sendCode(sheet) {
   for (let r = 2; r <= lastRow; r++) {
     const row = sheet.getRange(r, 1, 1, lastColumn);  // Promo, Email, Sent, Time
     const values = row.getValues().flat();
-    Logger.log(`row: ${r}`);
+    //Logger.log(`row: ${r}`);
     //Logger.log(values.join(','));
     //Logger.log(values[2]);
 
